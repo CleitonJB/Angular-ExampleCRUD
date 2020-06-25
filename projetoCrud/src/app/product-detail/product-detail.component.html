@@ -1,0 +1,31 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/products']"><mat-icon>list</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <!-- Usa como base os campos(dados) recebidos direto do servidor. Não do modelo(product.ts) -->
+      <mat-card-title><h2>{{ product.TABPROD_desc }}</h2></mat-card-title>
+      <!-- Usa como base os campos(dados) recebidos direto do servidor. Não do modelo(product.ts) -->
+      <mat-card-subtitle>{{ product.cod_oper_inc }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <dl>
+        <dt>Criado em:</dt>
+        <dd>{{ product.dat_inclusao | date }}</dd>  <!-- ... | date: Converte a data para: mês, dia, ano -->
+        <dt>Atualizado em:</dt>
+        <dd>{{ product.dat_alteracao | date }}</dd> <!-- ... | date: Converte a data para: mês, dia, ano -->
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- product.(TABPROD_seq_tabprod) se refere à resposta recebida diretamente do server. O link para a página de edição do produto é definido na linha abaixo -->
+      <a mat-flat-button color="primary" [routerLink]="['/product-edit', product.TABPROD_seq_tabprod]"><mat-icon>edit</mat-icon></a>
+      <!-- product.(TABPROD_seq_tabprod) se refere à resposta recebida diretamente do server. O função de excluir um produto pelo 'id' é chamado na linha abaixo -->
+      <a mat-flat-button color="warn" (click)="deleteProduct(product.TABPROD_seq_tabprod)"><mat-icon>delete</mat-icon></a>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,27 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <!-- Botão para retornar à lista de produtos -->
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/products']"><mat-icon>list</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="productForm" (ngSubmit)="onFormSubmit()">
+      <!-- Descrição do produto -->
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Descrição do produto..." formControlName="TABPROD_desc"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!productForm.get('TABPROD_desc').valid && productForm.get('TABPROD_desc').touched">Por favor, insira a descrição do produto</span>
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- Botão de envio -->
+      <div class="button-row">
+        <button type="submit" [disabled]="!productForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+      </div>
+    </form>
+  </mat-card>
+</div>
